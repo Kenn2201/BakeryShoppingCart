@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "231596316493",
+    "project_id": "bakeryshoppingcart",
+    "storage_bucket": "bakeryshoppingcart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231596316493:android:09da9bb8241b151c18c904",
+        "android_client_info": {
+          "package_name": "com.example.bakerymobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231596316493-mjncnrlqgjgkn2fg0kgtuq7lov42mgo1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg-g5DaUdQGW8YpOHMTomlSZsKzA2whgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231596316493-mjncnrlqgjgkn2fg0kgtuq7lov42mgo1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

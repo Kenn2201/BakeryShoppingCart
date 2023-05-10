@@ -15,3 +15,8 @@ List<Category> categoryList = [
   Category(image: "assets/donut.svg"),
   Category(image: "assets/sweet.svg"),
 ];
+
+class Images{
+  static const String asset = 'assets/';
+  static const frontLogo1 = '${asset}bakerylogobg.png';
+}

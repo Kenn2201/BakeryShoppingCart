@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../models/bakery.dart';
@@ -17,16 +18,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  final currentuser = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundLight,
+      backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('Bakery Shop'),
-          backgroundColor: kBackgroundDark,
+          backgroundColor: Colors.white,
           elevation: 0,
           toolbarHeight: 50.0,
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           actions: [
             Container(
               margin: const EdgeInsets.only(left: 18.0, top: 5.0),
@@ -43,6 +46,98 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
+      drawer: Drawer(
+        child: Container(
+          padding: EdgeInsets.all(2),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                kBackgroundLight,
+                Colors.grey
+              ],
+            ),
+          ),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              UserAccountsDrawerHeader(
+                accountEmail: Text('${currentuser.email!}'),
+                accountName: Text('Signed in as:'),
+                currentAccountPicture: const CircleAvatar(
+                  backgroundImage: NetworkImage('https://example.com/profile-picture.jpg'),
+                ),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [kBackgroundLight, Colors.grey],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                otherAccountsPictures: [
+                  IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: () {
+                    },
+                  ),
+                ],
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.question_mark),
+                title: Text('About App'),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('About App'),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Developed by: Rico Rhee Vaguchay'),
+                            SizedBox(height: 8),
+                            Text('Developed by: Kenn Vincent A. Nacario'),
+                            SizedBox(height: 8),
+                            Text('Developed by: Ronny Christian I. Pacheo'),
+                            SizedBox(height: 8),
+                            Text('App version: 1.0'),
+                          ],
+                        ),
+                        actions: <Widget>[
+                          ElevatedButton(
+                            child: Text('OK'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+
+                },
+              ),
+              Divider(color: Colors.grey,),
+              ListTile(
+                leading: Icon(Icons.logout),
+                title: Text('Log out'),
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/login', (route) => false);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Successfully Logged-Out!'),
+                      backgroundColor: Colors.orange,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
         body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

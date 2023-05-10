@@ -1,24 +1,54 @@
 
+import 'package:bakerymobileapp/auth/authentication.dart';
 import 'package:bakerymobileapp/views/home.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeFirebase();
   runApp(const MyApp());
 }
+
+Future<void> initializeFirebase() async {
+  await Firebase.initializeApp();
+  await FirebaseAppCheck.instance.activate();
+}
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bakery demo',
+      title: 'About Me',
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.grey,
       ),
-      home: const Home(),
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context,snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError){
+            return const Center(child: Text('Something went wrong'),);
+          }else if (snapshot.hasData){
+            //return const HomeScreen();
+            return  const Home();
+          } else{
+            return const AuthPage();
+          }
+        },
+      ),
+
     );
   }
 }
