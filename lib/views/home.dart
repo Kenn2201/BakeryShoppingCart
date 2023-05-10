@@ -1,46 +1,49 @@
-import 'package:bakerymobileapp/constants.dart';
-import 'package:bakerymobileapp/models/bakery.dart';
-import 'package:bakerymobileapp/models/cake.dart';
-import 'package:bakerymobileapp/models/category.dart';
-import 'package:bakerymobileapp/widgets/bakery_card.dart';
-import 'package:bakerymobileapp/widgets/cake_card.dart';
-import 'package:bakerymobileapp/widgets/category_card.dart';
-import 'package:bakerymobileapp/widgets/custom_list_tile.dart';
 import 'package:flutter/material.dart';
+import '../constants.dart';
+import '../models/bakery.dart';
+import '../models/cake.dart';
+import '../models/category.dart';
+import '../widgets/bakery_card.dart';
+import '../widgets/cake_card.dart';
+import '../widgets/category_card.dart';
+import '../widgets/custom_list_tile.dart';
+import 'cart.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundLight,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50.0),
-        child: SafeArea(
-          child: Container(
-              color: kBackgroundLight,
-              margin: const EdgeInsets.only(top: 25.0),
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
-              alignment: Alignment.centerLeft,
-              child: Row(
-                children: const <Widget>[
-                  Icon(
-                    Icons.location_on,
-                    color: Colors.grey,
-                  ),
-                  SizedBox(width: 12.0),
-                  Text("New York"),
-                  Spacer(),
-                  Icon(
-                    Icons.shopping_basket,
-                    color: Colors.grey,
-                  ),
-                ],
-              )),
+        appBar: AppBar(
+          title: const Text('Bakery Shop'),
+          backgroundColor: kBackgroundDark,
+          elevation: 0,
+          toolbarHeight: 50.0,
+          automaticallyImplyLeading: false,
+          actions: [
+            Container(
+              margin: const EdgeInsets.only(left: 18.0, top: 5.0),
+              child: IconButton(
+                icon: const Icon(Icons.shopping_cart),
+                color: Colors.grey,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Cart()),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
-      ),
-      body: SingleChildScrollView(
+        body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             const SizedBox(height: 25.0),

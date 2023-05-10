@@ -15,31 +15,25 @@ class Bakery {
 
 List<Bakery> bakeryList = [
   Bakery(
-    name: "Handmade Crakers",
+    name: "Pig Bread",
     open: "09.00",
     close: "20.00",
     distance: "5.5",
-    image: "assets/1.jpg",
+    image: "assets/pig.jpg",
   ),
   Bakery(
-    name: "Yue's Cake Store",
+    name: "Hotdog Bread",
     open: "09.00",
     close: "20.00",
     distance: "5.5",
-    image: "assets/5554d382bdf40_thumb900.jpg",
+    image: "assets/hotdog.jpg",
   ),
   Bakery(
-    name: "Carlota Pasteleria",
+    name: "Croissant",
     open: "09.00",
     close: "20.00",
     distance: "5.5",
-    image: "assets/attachment_113725429.jpg",
+    image: "assets/cross.jpg",
   ),
-  Bakery(
-    name: "Dominocake Bakery",
-    open: "09.00",
-    close: "20.00",
-    distance: "5.5",
-    image: "assets/LAE9AKLOVOBe-9ws-752-dominocake-1470987668_1_logo_orig.png",
-  ),
+
 ];
